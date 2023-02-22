@@ -39,3 +39,14 @@ Screenshots from app:
 Video of work:
 - https://drive.google.com/file/d/1YB4fTvwfLPNQUBaP_6fMPrZj00XgXYEY/view?usp=share_link
 - https://drive.google.com/file/d/1kQLXRHGjCrVvOcaOEWdyA4ioThBSTEKG/view?usp=share_link
+
+# 3rd HomeWork:
+
+- Connect React Native Debugger to the project
+- Launch React Native Debugger with a project
+
+Screenshots:
+- Element-inspector-ON https://drive.google.com/file/d/1BLtOpJxBUkdHHPnDUgP_bHVF6tl63WYo/view?usp=share_link  
+- Remote-debugging-working https://drive.google.com/file/d/1Zrxq9DHpuNzlvUykboAT1Ma9cfjndGBE/view?usp=share_link
+- React-native-debugger-app  https://drive.google.com/file/d/1wcJHofiWv9lZQ2d4Iy5BovVn2LaYIPMB/view?usp=share_link
+- React-native-debugger-console-working  https://drive.google.com/file/d/1RTwclSgP4WOAd8Skg423HcX9CMB35I4f/view?usp=share_link 
