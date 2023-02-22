@@ -1,4 +1,4 @@
-# react-native-projectproject
+# react-native-project
 
  # First homework: 
 - Install expo
