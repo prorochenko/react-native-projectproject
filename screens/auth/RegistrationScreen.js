@@ -33,7 +33,11 @@ export default function RegistrationScreen() {
   const [loginBorderOnFocus, setLoginBorderOnFocus] = useState('#E8E8E8');
   const [emailBorderOnFocus, setEmailBorderOnFocus] = useState('#E8E8E8');
   const [passwordBorderOnFocus, setPasswordBorderOnFocus] = useState('#E8E8E8');
+  const [showPassword, setShowPassword] = useState(true);
 
+  const changePasswordVisible = () => {
+    setShowPassword(!showPassword);
+  };
   // const [dimentions, setDimentions] = useState(Dimensions.get('window').width - 16 * 2);
 
   // useEffect(() => {
@@ -73,12 +77,14 @@ export default function RegistrationScreen() {
                 }}
               >
                 <View style={styles.avatar}>
-                  <AntDesign
-                    style={styles.avatarBtn}
-                    name="pluscircleo"
-                    size={25}
-                    color="#FF6C00"
-                  />
+                  <TouchableOpacity activeOpacity={0.8}>
+                    <AntDesign
+                      style={styles.avatarBtn}
+                      name="pluscircleo"
+                      size={25}
+                      color="#FF6C00"
+                    />
+                  </TouchableOpacity>
                 </View>
                 <Text style={styles.title}>Registration</Text>
                 <View style={styles.inputForm}>
@@ -114,25 +120,33 @@ export default function RegistrationScreen() {
                     onChangeText={value => setState(presState => ({ ...presState, email: value }))}
                     onSubmitEditing={keyboardHide}
                   />
-                  <TextInput
-                    placeholder="Password"
-                    style={{
-                      ...styles.input,
-                      borderColor: passwordBorderOnFocus,
-                      backgroundColor: passwordBorderOnFocus === '#FF6C00' ? '#FFFFFF' : '#F6F6F6',
-                    }}
-                    secureTextEntry={true}
-                    value={state.password}
-                    onFocus={() => {
-                      setIsShowKeyboard(true);
-                      setPasswordBorderOnFocus('#FF6C00');
-                    }}
-                    onBlur={() => setPasswordBorderOnFocus('#E8E8E8')}
-                    onChangeText={value =>
-                      setState(presState => ({ ...presState, password: value }))
-                    }
-                    onSubmitEditing={keyboardHide}
-                  />
+                  <View style={styles.inputPasswordBox}>
+                    <TextInput
+                      placeholder="Password"
+                      style={{
+                        ...styles.input,
+                        borderColor: passwordBorderOnFocus,
+                        backgroundColor:
+                          passwordBorderOnFocus === '#FF6C00' ? '#FFFFFF' : '#F6F6F6',
+                      }}
+                      secureTextEntry={showPassword}
+                      value={state.password}
+                      onFocus={() => {
+                        setIsShowKeyboard(true);
+                        setPasswordBorderOnFocus('#FF6C00');
+                      }}
+                      onBlur={() => setPasswordBorderOnFocus('#E8E8E8')}
+                      onChangeText={value =>
+                        setState(presState => ({ ...presState, password: value }))
+                      }
+                      onSubmitEditing={keyboardHide}
+                    />
+                    <TouchableOpacity style={styles.showPassword} activeOpacity={0.8}>
+                      <Text style={styles.passwordVisible} onPress={changePasswordVisible}>
+                        {showPassword ? 'Show Pass' : 'Hide'}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                   <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={submitData}>
                     <Text style={styles.btnText}>Register</Text>
                   </TouchableOpacity>
@@ -236,4 +250,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#1B4371',
   },
+  inputPasswordBox: {
+    position: 'relative',
+  },
+  showPassword: {
+    position: 'absolute',
+    top: 33,
+    right: 16,
+  },
+  passwordVisible: { color: '#1B4371' },
 });
