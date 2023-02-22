@@ -20,14 +20,16 @@ import { useFonts } from 'expo-font';
 SplashScreen.preventAutoHideAsync();
 
 const initialState = {
-  login: '',
   email: '',
   password: '',
 };
 
-export default function LoginForm() {
+export default function RegistrationScreen() {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+  const [emailBorderOnFocus, setEmailBorderOnFocus] = useState('#E8E8E8');
+  const [passwordBorderOnFocus, setPasswordBorderOnFocus] = useState('#E8E8E8');
+
   // const [dimentions, setDimentions] = useState(Dimensions.get('window').width - 16 * 2);
 
   // useEffect(() => {
@@ -41,8 +43,6 @@ export default function LoginForm() {
   //     () => dimensionsHandler.remove();
   //   };
   // }, []);
-
-  const onFocus = () => setIsShowKeyboard(true);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
@@ -61,43 +61,55 @@ export default function LoginForm() {
       <View style={styles.container}>
         <ImageBackground style={styles.image} source={require('../../assets/PhotoBG.png')}>
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <View
-              style={{
-                ...styles.formReg,
-                marginBottom: isShowKeyboard ? -97 : 78,
-              }}
-            >
-              <Text style={styles.title}>Registration</Text>
-              <View style={styles.form}>
-                <TextInput
-                  placeholder="Login"
-                  style={styles.input}
-                  value={state.login}
-                  onFocus={onFocus}
-                  onChangeText={value => setState(presState => ({ ...presState, login: value }))}
-                  onSubmitEditing={keyboardHide}
-                />
-                <TextInput
-                  placeholder="Email"
-                  style={styles.input}
-                  value={state.email}
-                  onFocus={onFocus}
-                  onChangeText={value => setState(presState => ({ ...presState, email: value }))}
-                  onSubmitEditing={keyboardHide}
-                />
-                <TextInput
-                  placeholder="Password"
-                  style={styles.input}
-                  secureTextEntry={true}
-                  value={state.password}
-                  onFocus={onFocus}
-                  onChangeText={value => setState(presState => ({ ...presState, password: value }))}
-                  onSubmitEditing={keyboardHide}
-                />
-                <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={submitData}>
-                  <Text style={styles.btnText}>Зареєструватися</Text>
-                </TouchableOpacity>
-                <Text style={styles.textAlready}>Вже є аккаунт? Увійти</Text>
+            <View style={styles.bottomForm}>
+              <View
+                style={{
+                  ...styles.loginForm,
+                  marginBottom: isShowKeyboard ? -97 : 78,
+                }}
+              >
+                <Text style={styles.title}>Login</Text>
+                <View style={styles.inputForm}>
+                  <TextInput
+                    placeholder="Email"
+                    style={{
+                      ...styles.input,
+                      borderColor: emailBorderOnFocus,
+                      backgroundColor: emailBorderOnFocus === '#FF6C00' ? '#FFFFFF' : '#F6F6F6',
+                    }}
+                    value={state.email}
+                    onFocus={() => {
+                      setIsShowKeyboard(true);
+                      setEmailBorderOnFocus('#FF6C00');
+                    }}
+                    onBlur={() => setEmailBorderOnFocus('#E8E8E8')}
+                    onChangeText={value => setState(presState => ({ ...presState, email: value }))}
+                    onSubmitEditing={keyboardHide}
+                  />
+                  <TextInput
+                    placeholder="Password"
+                    style={{
+                      ...styles.input,
+                      borderColor: passwordBorderOnFocus,
+                      backgroundColor: passwordBorderOnFocus === '#FF6C00' ? '#FFFFFF' : '#F6F6F6',
+                    }}
+                    secureTextEntry={true}
+                    value={state.password}
+                    onFocus={() => {
+                      setIsShowKeyboard(true);
+                      setPasswordBorderOnFocus('#FF6C00');
+                    }}
+                    onBlur={() => setPasswordBorderOnFocus('#E8E8E8')}
+                    onChangeText={value =>
+                      setState(presState => ({ ...presState, password: value }))
+                    }
+                    onSubmitEditing={keyboardHide}
+                  />
+                  <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={submitData}>
+                    <Text style={styles.btnText}>Sign in</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.bottomText}>Don't have an account? Register</Text>
+                </View>
               </View>
             </View>
           </KeyboardAvoidingView>
@@ -122,10 +134,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     // alignItems: 'center',
   },
-
+  bottomForm: {
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+  },
+  loginForm: {},
   input: {
     borderWidth: 1,
-    backgroundColor: '#F6F6F6',
+    // backgroundColor: '#F6F6F6',
     borderColor: '#E8E8E8',
     borderStyle: 'solid',
     height: 50,
@@ -134,12 +151,9 @@ const styles = StyleSheet.create({
     color: '#212121',
     paddingLeft: 16,
     marginTop: 16,
+    placeholderTextColor: '#BDBDBD',
   },
-  formReg: {
-    backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-  },
+
   title: {
     color: '#212121',
     fontSize: 30,
@@ -150,9 +164,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  form: {
+  inputForm: {
     marginHorizontal: 16,
   },
+
   btn: {
     height: 51,
     justifyContent: 'center',
@@ -173,7 +188,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
   },
-  textAlready: {
+  bottomText: {
     marginTop: 16,
+    textAlign: 'center',
+    color: '#1B4371',
   },
 });

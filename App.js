@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 
-import RegistrationScreen from './screens/auth/RegistrationScree';
+import RegistrationScreen from './screens/auth/RegistrationScreen';
 import LoginForm from './screens/auth/LoginScreen';
 
 SplashScreen.preventAutoHideAsync();
@@ -26,8 +26,9 @@ export default function App() {
   }
 
   return (
-    <TouchableWithoutFeedback onLayout={onLayoutRootView}>
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <RegistrationScreen />
-    </TouchableWithoutFeedback>
+      {/* <LoginForm /> */}
+    </View>
   );
 }
