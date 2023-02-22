@@ -14,6 +14,7 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
@@ -71,7 +72,14 @@ export default function RegistrationScreen() {
                   marginBottom: isShowKeyboard ? -97 : 78,
                 }}
               >
-                <View style={styles.avatar}></View>
+                <View style={styles.avatar}>
+                  <AntDesign
+                    style={styles.avatarBtn}
+                    name="pluscircleo"
+                    size={25}
+                    color="#FF6C00"
+                  />
+                </View>
                 <Text style={styles.title}>Registration</Text>
                 <View style={styles.inputForm}>
                   <TextInput
@@ -162,6 +170,11 @@ const styles = StyleSheet.create({
     marginTop: -60,
     backgroundColor: '#F6F6F6',
     borderRadius: 16,
+  },
+  avatarBtn: {
+    position: 'absolute',
+    top: 81,
+    left: 107.5,
   },
   bottomForm: {
     backgroundColor: '#FFFFFF',

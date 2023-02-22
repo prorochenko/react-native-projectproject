@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     lineHeight: 35,
     letterSpacing: '0.01em',
     marginBottom: 16,
+    marginTop: 32,
     // justifyContent: 'center',
     textAlign: 'center',
   },
