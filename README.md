@@ -8,10 +8,11 @@
 - Customize Android Studio
 - Install expo client on your phone
 - Run created project on phone, Android emulator
+
 Screenshots:
-https://ibb.co/wKR9GJy
-https://ibb.co/sJZHHWn
-https://ibb.co/J3C9vb6
+- https://ibb.co/wKR9GJy
+- https://ibb.co/sJZHHWn
+- https://ibb.co/J3C9vb6
 
 
 # Second Homework:
@@ -28,7 +29,8 @@ https://ibb.co/J3C9vb6
 - Add styles to the LoginScreen component
 
 Screenshot from console:
-https://drive.google.com/file/d/1DSn6VKhI0FqA98D2eHddiiSFTzL56zjN/view?usp=share_link
+- https://drive.google.com/file/d/1DSn6VKhI0FqA98D2eHddiiSFTzL56zjN/view?usp=share_link
+
 Video of work:
-https://drive.google.com/file/d/1YB4fTvwfLPNQUBaP_6fMPrZj00XgXYEY/view?usp=share_link
-https://drive.google.com/file/d/1kQLXRHGjCrVvOcaOEWdyA4ioThBSTEKG/view?usp=share_link
+- https://drive.google.com/file/d/1YB4fTvwfLPNQUBaP_6fMPrZj00XgXYEY/view?usp=share_link
+- https://drive.google.com/file/d/1kQLXRHGjCrVvOcaOEWdyA4ioThBSTEKG/view?usp=share_link
