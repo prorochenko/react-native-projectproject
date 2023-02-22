@@ -31,6 +31,11 @@ Screenshots:
 Screenshot from console:
 - https://drive.google.com/file/d/1DSn6VKhI0FqA98D2eHddiiSFTzL56zjN/view?usp=share_link
 
+Screenshots from app:
+- https://drive.google.com/file/d/1LWkQQcyGv9QNaYMNrEQhhdpbdm7tstRk/view?usp=share_link
+- https://drive.google.com/file/d/16Gail1eFv1HCA5kSe3FVDHc-OPz6Xdxl/view?usp=share_link
+- https://drive.google.com/file/d/1d0yLIS2WBzV2TvSHlqJcc-6a-1OLWvHc/view?usp=share_link
+
 Video of work:
 - https://drive.google.com/file/d/1YB4fTvwfLPNQUBaP_6fMPrZj00XgXYEY/view?usp=share_link
 - https://drive.google.com/file/d/1kQLXRHGjCrVvOcaOEWdyA4ioThBSTEKG/view?usp=share_link
