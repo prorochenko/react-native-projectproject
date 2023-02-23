@@ -12,6 +12,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Dimensions,
+  Button,
 } from 'react-native';
 
 import * as SplashScreen from 'expo-splash-screen';
@@ -24,7 +25,8 @@ const initialState = {
   password: '',
 };
 
-export default function RegistrationScreen() {
+export default function LoginScreen({ navigation }) {
+  console.log('navigation', navigation);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [emailBorderOnFocus, setEmailBorderOnFocus] = useState('#E8E8E8');
@@ -34,20 +36,6 @@ export default function RegistrationScreen() {
   const changePasswordVisible = () => {
     setShowPassword(!showPassword);
   };
-  // const [dimentions, setDimentions] = useState(Dimensions.get('window').width - 16 * 2);
-
-  // useEffect(() => {
-  //   const onChange = () => {
-  //     const windowWidth = Dimensions.get('window').width;
-  //     console.log(windowWidth);
-  //     setDimentions(windowWidth);
-  //   };
-  //   dimensionsHandler = Dimensions.addEventListener('change', onChange);
-  //   return () => {
-  //     () => dimensionsHandler.remove();
-  //   };
-  // }, []);
-
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
@@ -120,7 +108,15 @@ export default function RegistrationScreen() {
                   <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={submitData}>
                     <Text style={styles.btnText}>Sign in</Text>
                   </TouchableOpacity>
-                  <Text style={styles.bottomText}>Don't have an account? Register</Text>
+                  <Text style={styles.bottomText}>
+                    Don't have an account?
+                    <Text
+                      style={styles.btnNavigate}
+                      onPress={() => navigation.navigate('Register')}
+                    >
+                      &nbsp;Register
+                    </Text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -155,6 +151,9 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     // backgroundColor: '#F6F6F6',
+    fontFamily: 'Roboto_Regular',
+    fontSize: 16,
+    lineHeight: 19,
     borderColor: '#E8E8E8',
     borderStyle: 'solid',
     height: 50,
@@ -168,6 +167,7 @@ const styles = StyleSheet.create({
 
   title: {
     color: '#212121',
+    fontFamily: 'Roboto_Bold',
     fontSize: 30,
     lineHeight: 35,
     letterSpacing: '0.01em',
@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
     }),
   },
   btnText: {
+    fontFamily: 'Roboto_Regular',
     color: '#FFFFFF',
     fontSize: 16,
     lineHeight: 19,
@@ -204,6 +205,15 @@ const styles = StyleSheet.create({
   bottomText: {
     marginTop: 16,
     textAlign: 'center',
+    fontFamily: 'Roboto_Regular',
+    fontSize: 16,
+    lineHeight: 19,
+    color: '#1B4371',
+  },
+  btnNavigate: {
+    fontFamily: 'Roboto_Regular',
+    fontSize: 16,
+    lineHeight: 19,
     color: '#1B4371',
   },
   inputPasswordBox: {

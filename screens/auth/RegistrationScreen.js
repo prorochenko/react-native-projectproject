@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   Image,
+  Button,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -27,7 +28,7 @@ const initialState = {
   password: '',
 };
 
-export default function RegistrationScreen() {
+export default function RegistrationScreen({ navigation }) {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
   const [loginBorderOnFocus, setLoginBorderOnFocus] = useState('#E8E8E8');
@@ -150,7 +151,12 @@ export default function RegistrationScreen() {
                   <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={submitData}>
                     <Text style={styles.btnText}>Register</Text>
                   </TouchableOpacity>
-                  <Text style={styles.bottomText}>Already have an account? Sign in</Text>
+                  <Text style={styles.bottomText}>
+                    Already have an account?
+                    <Text style={styles.btnNavigate} onPress={() => navigation.navigate('Login')}>
+                      &nbsp;Sign In
+                    </Text>
+                  </Text>
                 </View>
               </View>
             </View>
@@ -199,6 +205,9 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     // backgroundColor: '#F6F6F6',
+    fontFamily: 'Roboto_Regular',
+    fontSize: 16,
+    lineHeight: 19,
     borderColor: '#E8E8E8',
     borderStyle: 'solid',
     height: 50,
@@ -212,11 +221,12 @@ const styles = StyleSheet.create({
 
   title: {
     color: '#212121',
+    fontFamily: 'Roboto_Bold',
     fontSize: 30,
     lineHeight: 35,
     letterSpacing: '0.01em',
-    marginTop: 32,
     marginBottom: 16,
+    marginTop: 32,
     // justifyContent: 'center',
     textAlign: 'center',
   },
@@ -241,6 +251,8 @@ const styles = StyleSheet.create({
     }),
   },
   btnText: {
+    fontFamily: 'Roboto_Regular',
+
     color: '#FFFFFF',
     fontSize: 16,
     lineHeight: 19,
@@ -248,6 +260,15 @@ const styles = StyleSheet.create({
   bottomText: {
     marginTop: 16,
     textAlign: 'center',
+    fontFamily: 'Roboto_Regular',
+    fontSize: 16,
+    lineHeight: 19,
+    color: '#1B4371',
+  },
+  btnNavigate: {
+    fontFamily: 'Roboto_Regular',
+    fontSize: 16,
+    lineHeight: 19,
     color: '#1B4371',
   },
   inputPasswordBox: {
@@ -258,5 +279,6 @@ const styles = StyleSheet.create({
     top: 33,
     right: 16,
   },
+
   passwordVisible: { color: '#1B4371' },
 });
