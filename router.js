@@ -72,6 +72,9 @@ export const useRoute = isAuth => {
               <AntDesign name="plus" size={20} color="white" />
             </View>
           ),
+          headerLeft: () => (
+            <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={24} color="#BDBDBD" />
+          ),
         }}
         name="Create"
         component={CreateScreen}
@@ -79,6 +82,10 @@ export const useRoute = isAuth => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ focuses, size, color }) => <Feather name="user" size={24} color={color} />,
+          headerLeft: () => (
+            <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={24} color="#BDBDBD" />
+          ),
+          headerShown: false,
         }}
         name="Profile"
         component={ProfileScreen}
