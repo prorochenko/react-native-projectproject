@@ -1,10 +1,11 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 //icon imports:
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import RegistrationScreen from './screens/auth/RegistrationScreen';
 import LoginScreen from './screens/auth/LoginScreen';
@@ -21,8 +22,8 @@ const MainTab = createBottomTabNavigator();
 export const useRoute = isAuth => {
   if (!isAuth) {
     return (
-      <AuthStack.Navigator>
-        <AuthStack.Screen name="Login" component={LoginScreen} />
+      <AuthStack.Navigator initialRouteName="Register">
+        <AuthStack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
         <AuthStack.Screen
           options={{ headerShown: false }}
           name="Register"
@@ -56,6 +57,9 @@ export const useRoute = isAuth => {
         options={{
           tabBarIcon: ({ focuses, size, color }) => (
             <SimpleLineIcons name="grid" size={24} color={color} />
+          ),
+          headerRight: () => (
+            <Ionicons style={{ marginRight: 10 }} name="exit-outline" size={26} color="#BDBDBD" />
           ),
         }}
         name="Posts"
