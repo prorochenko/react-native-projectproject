@@ -2,17 +2,15 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
-import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import RegistrationScreen from './screens/auth/RegistrationScreen';
-import LoginScreen from './screens/auth/LoginScreen';
+import { useRoute } from './router';
 
 SplashScreen.preventAutoHideAsync();
 
-const AuthStack = createStackNavigator();
-
 export default function App() {
+  const routing = useRoute(true);
+
   const [fontsLoaded] = useFonts({
     Roboto_Regular: require('./assets/fonts/Roboto-Regular.ttf'),
     Roboto_Medium: require('./assets/fonts/Roboto-Medium.ttf'),
@@ -31,18 +29,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <NavigationContainer>
-        <AuthStack.Navigator>
-          <AuthStack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-          <AuthStack.Screen
-            options={{ headerShown: false }}
-            name="Register"
-            component={RegistrationScreen}
-          />
-          {/* <RegistrationScreen /> */}
-          {/* <LoginScreen /> */}
-        </AuthStack.Navigator>
-      </NavigationContainer>
+      <NavigationContainer>{routing}</NavigationContainer>
     </View>
   );
 }

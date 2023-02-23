@@ -14,6 +14,7 @@ import {
   Dimensions,
   Image,
   Button,
+  ScrollView,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -70,6 +71,7 @@ export default function RegistrationScreen({ navigation }) {
       <View style={styles.container}>
         <ImageBackground style={styles.image} source={require('../../assets/PhotoBG.png')}>
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            {/* <ScrollView> */}
             <View style={styles.bottomForm}>
               <View
                 style={{
@@ -151,17 +153,22 @@ export default function RegistrationScreen({ navigation }) {
                   <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={submitData}>
                     <Text style={styles.btnText}>Register</Text>
                   </TouchableOpacity>
-                  <Text style={styles.bottomText}>
-                    Already have an account?
-                    <Text style={styles.btnNavigate} onPress={() => navigation.navigate('Login')}>
-                      &nbsp;Sign In
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate('Login')}
+                  >
+                    <Text style={styles.bottomText}>
+                      Already have an account?
+                      <Text style={styles.btnNavigate}>&nbsp;Sign In</Text>
                     </Text>
-                  </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
+            {/* </ScrollView> */}
           </KeyboardAvoidingView>
         </ImageBackground>
+
         {/* <StatusBar style="auto" /> */}
       </View>
     </TouchableWithoutFeedback>

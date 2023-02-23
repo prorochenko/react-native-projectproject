@@ -108,15 +108,15 @@ export default function LoginScreen({ navigation }) {
                   <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={submitData}>
                     <Text style={styles.btnText}>Sign in</Text>
                   </TouchableOpacity>
-                  <Text style={styles.bottomText}>
-                    Don't have an account?
-                    <Text
-                      style={styles.btnNavigate}
-                      onPress={() => navigation.navigate('Register')}
-                    >
-                      &nbsp;Register
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate('Register')}
+                  >
+                    <Text style={styles.bottomText}>
+                      Don't have an account?
+                      <Text style={styles.btnNavigate}>&nbsp;Register</Text>
                     </Text>
-                  </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
