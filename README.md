@@ -50,3 +50,31 @@ Screenshots:
 - Remote-debugging-working https://drive.google.com/file/d/1Zrxq9DHpuNzlvUykboAT1Ma9cfjndGBE/view?usp=share_link
 - React-native-debugger-app  https://drive.google.com/file/d/1wcJHofiWv9lZQ2d4Iy5BovVn2LaYIPMB/view?usp=share_link
 - React-native-debugger-console-working  https://drive.google.com/file/d/1RTwclSgP4WOAd8Skg423HcX9CMB35I4f/view?usp=share_link 
+
+# 4th HomeWork:
+
+- Create PostsScreen
+- Create PostsScreen
+- Create CommentsScreen
+- Create ProfileScreen
+- Create a MapScreen
+- Create Home Screen
+- Connect navigation to the project.
+- Add transitions between the LoginScreen and RegistrationScreen screens to the project using the createStackNavigator component
+- From the RegistrationScreen you can go to the LoginScreen by clicking on the text Login
+- From the LoginScreen you can go to the RegistrationScreen by the text Register
+- After submitting in LoginScreen, RegistrationScreen redirects to Home where the PostsScreen screen is immediately shown
+- Enable bottom navigation using createBottomTabNavigator
+- In the bottom navigation create 3 transitions.
+- Clicking on icon #1 takes you to the PostsScreen
+- Clicking on icon #2 takes you to the CreatePostsScreen screen
+- Clicking on icon #3 takes you to the ProfileScreen
+- In the header on the PostsScreen screen, add an icon for logout
+- Styling the bottom navigation
+
+Screenshots + Video:
+- https://drive.google.com/file/d/1TIF5SA8zvGhCYFjcAAANR3QT_fLw3EpA/view?usp=share_link
+- https://drive.google.com/file/d/1noPmpELdbdKjI0pUhn6V5uievorAX9Ys/view?usp=share_link
+- https://drive.google.com/file/d/1ZBjRw-PUMs1DKmAAOW_J08bDCaRu8bK7/view?usp=share_link
+- https://drive.google.com/file/d/1uvqcBvIApSq2cxrrf2e6VQdtTfF4v4rz/view?usp=share_link
+
