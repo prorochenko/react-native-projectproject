@@ -11,6 +11,9 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeAuth } from '../../redux/store';
+
 //icons
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -19,6 +22,8 @@ import { Feather } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
 const ProfileScreen = () => {
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <ImageBackground style={styles.image} source={require('../../assets/PhotoBG.png')}>
@@ -37,7 +42,12 @@ const ProfileScreen = () => {
               </TouchableOpacity>
             </View>
             <TouchableOpacity activeOpacity={0.8} style={styles.iconExit}>
-              <Ionicons name="exit-outline" size={26} color="#BDBDBD" />
+              <Ionicons
+                name="exit-outline"
+                size={26}
+                color="#BDBDBD"
+                onPress={() => dispatch(changeAuth(false))}
+              />
             </TouchableOpacity>
 
             <Text style={styles.title}>Natali Romanova</Text>

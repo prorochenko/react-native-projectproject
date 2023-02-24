@@ -14,6 +14,8 @@ import {
   Dimensions,
   Button,
 } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeAuth } from '../../redux/store';
 
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
@@ -33,6 +35,8 @@ export default function LoginScreen({ navigation }) {
   const [passwordBorderOnFocus, setPasswordBorderOnFocus] = useState('#E8E8E8');
   const [showPassword, setShowPassword] = useState(true);
 
+  const dispatch = useDispatch();
+
   const changePasswordVisible = () => {
     setShowPassword(!showPassword);
   };
@@ -46,6 +50,7 @@ export default function LoginScreen({ navigation }) {
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
+    dispatch(changeAuth(true));
   };
 
   return (

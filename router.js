@@ -1,6 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { HeaderBackButton } from '@react-navigation/elements';
+import { CommonActions } from '@react-navigation/native';
+import { changeAuth } from './redux/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { authSelectors } from './redux/auth/authSelectors';
+
 //icon imports:
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -18,8 +24,13 @@ import reactDom from 'react-dom';
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
-
 export const useRoute = isAuth => {
+  // const addsAuth = useSelector(state => state.isAuth);
+  // const isAuth = useSelector(authSelectors.getIsAuth);
+  // const aisAuth = false;
+  // const isAuth = useSelector(state => state.isAuth);
+  console.log('hey', isAuth);
+  // const dispatch = useDispatch();
   if (!isAuth) {
     return (
       <AuthStack.Navigator initialRouteName="Register">
@@ -59,7 +70,13 @@ export const useRoute = isAuth => {
             <SimpleLineIcons name="grid" size={24} color={color} />
           ),
           headerRight: () => (
-            <Ionicons style={{ marginRight: 10 }} name="exit-outline" size={26} color="#BDBDBD" />
+            <Ionicons
+              style={{ marginRight: 10 }}
+              name="exit-outline"
+              size={26}
+              color="#BDBDBD"
+              // onPress={() => dispatch(changeAuth(false))}
+            />
           ),
         }}
         name="Posts"
@@ -73,8 +90,15 @@ export const useRoute = isAuth => {
             </View>
           ),
           headerLeft: () => (
+            // <HeaderBackButton
+            // onPress={() => {
+            // navigation.dispatch(CommonActions.goBack());
+            // }}
+            // />
+            // <HeaderBackButton title="Hello" onPress={() => navigation.navigate('Posts')} />
             <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={24} color="#BDBDBD" />
           ),
+          headerBackButtonMenuEnabled: true,
         }}
         name="Create"
         component={CreateScreen}
