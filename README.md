@@ -78,3 +78,21 @@ Screenshots + Video:
 - https://drive.google.com/file/d/1ZBjRw-PUMs1DKmAAOW_J08bDCaRu8bK7/view?usp=share_link
 - https://drive.google.com/file/d/1uvqcBvIApSq2cxrrf2e6VQdtTfF4v4rz/view?usp=share_link
 
+# 5th HomeWork:
+
+- Connect the camera to the CreatePostsScreen component;
+- When the CreatePostsScreen screen is opened, the camera is activated and the image from it is displayed in the block with the camera icon
+- Clicking on the camera icon takes a picture
+- You can add a photo title to the input with the Title placeholder
+- You can add the name where the photo was taken to the input with the Placeholder Location.
+- Add a geolocation definition at the time of creating a post when clicking on the Publish button
+- After creating a post, it should redirect to the PostsScreen screen
+- In the individual post component, when clicking on the comments icon, it redirects to the CommentsScreen screen
+- In the individual post component, when clicking on the geolocation icon, it redirects to the MapScreen screen where you can see a map with a marker where the photo was taken
+
+Screenshots + Video:
+- Comment Screen https://drive.google.com/file/d/1pkls1FvcdZUUODmHhZ0vVaLs9Xeq2CYz/view?usp=share_link
+- Create Post Screen https://drive.google.com/file/d/1n3tcqZKP3fbv3t1-1puKI-v5R3IMWpqf/view?usp=share_link
+- Map Screen https://drive.google.com/file/d/1IpVQgdQqN6rAKnMgZTxtmbOi8mZm0u7B/view?usp=share_link
+- Posts Screen https://drive.google.com/file/d/1nZu4-2_7sskZlPviKfhBo-xq2gS72aOx/view?usp=share_link
+- Video https://drive.google.com/file/d/1qhCB60t1koSHxz8iCiNWpElDsNdo8G_y/view?usp=share_link
