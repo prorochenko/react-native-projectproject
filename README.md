@@ -89,3 +89,10 @@ Screenshots + Video:
 - After creating a post, it should redirect to the PostsScreen screen
 - In the individual post component, when clicking on the comments icon, it redirects to the CommentsScreen screen
 - In the individual post component, when clicking on the geolocation icon, it redirects to the MapScreen screen where you can see a map with a marker where the photo was taken
+
+Screenshots + Video:
+- Comment Screen https://drive.google.com/file/d/1pkls1FvcdZUUODmHhZ0vVaLs9Xeq2CYz/view?usp=share_link
+- Create Post Screen https://drive.google.com/file/d/1n3tcqZKP3fbv3t1-1puKI-v5R3IMWpqf/view?usp=share_link
+- Map Screen https://drive.google.com/file/d/1IpVQgdQqN6rAKnMgZTxtmbOi8mZm0u7B/view?usp=share_link
+- Posts Screen https://drive.google.com/file/d/1nZu4-2_7sskZlPviKfhBo-xq2gS72aOx/view?usp=share_link
+- Video https://drive.google.com/file/d/1qhCB60t1koSHxz8iCiNWpElDsNdo8G_y/view?usp=share_link
