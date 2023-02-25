@@ -15,7 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import RegistrationScreen from './screens/auth/RegistrationScreen';
 import LoginScreen from './screens/auth/LoginScreen';
-import PostsScreen from './screens/main/PostsScreen';
+import PostScreens from './screens/main/PostsScreen';
 import CreateScreen from './screens/main/CreatePostsScreen';
 import ProfileScreen from './screens/main/ProfileScreen';
 
@@ -80,7 +80,7 @@ export const useRoute = isAuth => {
           ),
         }}
         name="Posts"
-        component={PostsScreen}
+        component={PostScreens}
       />
       <MainTab.Screen
         options={{
@@ -96,7 +96,9 @@ export const useRoute = isAuth => {
             // }}
             // />
             // <HeaderBackButton title="Hello" onPress={() => navigation.navigate('Posts')} />
-            <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={24} color="#BDBDBD" />
+            <TouchableOpacity activeOpacity={0.8}>
+              <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={10} color="#BDBDBD" />
+            </TouchableOpacity>
           ),
           headerBackButtonMenuEnabled: true,
         }}

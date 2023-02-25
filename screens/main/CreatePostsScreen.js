@@ -1,18 +1,138 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
+import { Camera } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
+import * as Location from 'expo-location';
 
-const CreateScreen = () => {
+const initialState = {
+  Name: '',
+  Location: '',
+};
+
+const CreateScreen = ({ navigation }) => {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [cameraRef, setCameraRef] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
+  const [photo, setPhoto] = useState('');
+  const [location, setLocation] = useState(null);
+  const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Permission to access location was denied');
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      console.log('location', location);
+      const coords = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      };
+      setLocation(coords);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      await MediaLibrary.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
+  const takePhoto = async () => {
+    if (cameraRef && location) {
+      const { uri } = await cameraRef.takePictureAsync();
+
+      console.log({ uri });
+      setPhoto(uri);
+      const asset = await MediaLibrary.createAssetAsync(uri);
+    }
+  };
+
+  const sendPhoto = () => {
+    // console.log(navigation);
+    navigation.navigate('DefaultScreen', { photo, location, state });
+  };
   return (
     <View style={styles.container}>
-      <View style={styles.addImage}>
-        <View style={styles.photoCircle}>
-          <MaterialIcons name="photo-camera" size={24} color="#E8E8E8" />
-        </View>
-      </View>
-      <Text style={styles.text}>Upload photo</Text>
-      <TextInput placeholder="Name..." style={styles.input} placeholderTextColor={'#BDBDBD'} />
+      {photo === '' ? (
+        <>
+          <Camera
+            style={styles.addImage}
+            type={Camera.Constants.Type.back}
+            ref={ref => {
+              setCameraRef(ref);
+            }}
+          >
+            <TouchableOpacity style={styles.photoCircle} activeOpacity={0.8} onPress={takePhoto}>
+              <MaterialIcons name="photo-camera" size={24} color="#E8E8E8" />
+            </TouchableOpacity>
+          </Camera>
+          <TouchableOpacity activeOpacity={0.8} onPress={takePhoto}>
+            <Text style={styles.text}>Upload photo</Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <>
+          <View
+            style={{
+              ...styles.addImage,
+              backgroundColor: 'transparent',
+            }}
+          >
+            <ImageBackground
+              source={{ uri: photo }}
+              // resizeMode="cover"
+              style={{
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              imageStyle={{ borderRadius: 8 }}
+            >
+              <TouchableOpacity
+                style={{
+                  ...styles.photoCircle,
+                }}
+                activeOpacity={0.8}
+                onPress={() => setPhoto('')}
+              >
+                <MaterialIcons name="photo-camera" size={24} color="#E8E8E8" />
+              </TouchableOpacity>
+            </ImageBackground>
+          </View>
+          <TouchableOpacity activeOpacity={0.8} onPress={() => setPhoto('')}>
+            <Text style={styles.text}>Edit photo</Text>
+          </TouchableOpacity>
+        </>
+      )}
+
+      <TextInput
+        placeholder="Name..."
+        style={styles.input}
+        onChangeText={value => setState(presState => ({ ...presState, Name: value }))}
+        placeholderTextColor={'#BDBDBD'}
+      />
       <View>
         <EvilIcons
           style={{ position: 'absolute', zIndex: 1, left: 11, top: 15 }}
@@ -24,9 +144,10 @@ const CreateScreen = () => {
           placeholder="Location"
           style={{ ...styles.input, paddingLeft: 20 }}
           placeholderTextColor={'#BDBDBD'}
+          onChangeText={value => setState(presState => ({ ...presState, Location: value }))}
         />
       </View>
-      <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+      <TouchableOpacity style={styles.btn} activeOpacity={0.8} onPress={sendPhoto}>
         <Text style={styles.btnText}>Post</Text>
       </TouchableOpacity>
     </View>
@@ -47,7 +168,8 @@ const styles = StyleSheet.create({
     height: 240,
     marginHorizontal: 16,
     backgroundColor: '#E8E8E8',
-    borderRadius: 8,
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   photoCircle: {
     justifyContent: 'center',

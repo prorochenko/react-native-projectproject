@@ -1,54 +1,54 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const PostsScreen = () => {
+//screens
+import DefaultScreenPosts from '../nestedScreens/DefaultScreenPosts';
+import CommentsScreen from '../nestedScreens/CommentsScreen';
+import MapScreen from '../nestedScreens/MapScreen';
+
+const NestedScreens = createStackNavigator();
+const PostScreens = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.userBox}>
-        <Image source={require('../../assets/ava.png')} style={styles.Ava} />
-        <View style={styles.userData}>
-          <Text style={styles.userName}>Natali Romanova</Text>
-          <Text style={styles.userEmail}>email@example.com</Text>
-        </View>
-      </View>
-    </View>
+    <NestedScreens.Navigator initialRouteName="DefaultScreen">
+      <NestedScreens.Screen
+        options={{ headerShown: false }}
+        name="DefaultScreen"
+        component={DefaultScreenPosts}
+      />
+      <NestedScreens.Screen
+        options={{ headerShown: false }}
+        name="Comments"
+        component={CommentsScreen}
+      />
+      <NestedScreens.Screen
+        options={{
+          headerShown: false,
+          headerLeft: () => (
+            <HeaderBackButton
+              onPress={() => {
+                navigation.dispatch(CommonActions.goBack());
+              }}
+            />
+            // <HeaderBackButton title="Hello" onPress={() => navigation.navigate('Posts')} />
+            // <TouchableOpacity activeOpacity={0.8}>
+            //   <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={10} color="#BDBDBD" />
+            // </TouchableOpacity>
+          ),
+          headerBackButtonMenuEnabled: true,
+        }}
+        name="Map"
+        component={MapScreen}
+      />
+    </NestedScreens.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
-  userBox: {
-    marginTop: 32,
-    marginLeft: 16,
-    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 32,
-  },
-  Ava: {
-    width: 60,
-    height: 60,
-    borderRadius: 16,
-  },
-  userData: {
-    marginLeft: 8,
-  },
-  userName: {
-    fontFamily: 'Roboto_Bold',
-    fontWeight: 700,
-    fontSize: 13,
-    lineHeight: 15,
-    color: '#212121',
-  },
-  userEmail: {
-    fontFamily: 'Roboto_Regular',
-    fontWeight: 400,
-    fontSize: 11,
-    lineHeight: 13,
-    color: 'rgba(33, 33, 33, 0.8);',
   },
 });
-export default PostsScreen;
+export default PostScreens;
