@@ -96,3 +96,17 @@ Screenshots + Video:
 - Map Screen https://drive.google.com/file/d/1IpVQgdQqN6rAKnMgZTxtmbOi8mZm0u7B/view?usp=share_link
 - Posts Screen https://drive.google.com/file/d/1nZu4-2_7sskZlPviKfhBo-xq2gS72aOx/view?usp=share_link
 - Video https://drive.google.com/file/d/1qhCB60t1koSHxz8iCiNWpElDsNdo8G_y/view?usp=share_link
+
+
+# 6th HomeWork:
+
+- Connect Redux to the project
+- Connect Firebase to the project
+- Add registration logic on RegistrationScreen via Firebase methods
+- Add login logic on LoginScreen via Firebase methods
+- Update the user profile on Firebase and add the login there in the displayName field after registration
+- Save user data in Redux after registration or login
+- Add a check to see if the user is logged into the application or not. If logged in, then immediately redirect to the PostsScreen screen otherwise - to the LoginScreen screen
+- Add logic Logout on PostsScreen when clicking on icon in header using Firebase methods
+- Add post loading logic to database using Firebase and Redux
+- Add logic for adding a comment under a post using Firebase and Redux
