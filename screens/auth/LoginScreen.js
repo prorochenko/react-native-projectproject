@@ -19,7 +19,7 @@ import { changeAuth } from '../../redux/store';
 
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
-
+import { authSignInUser } from '../../redux/auth/authOperations';
 SplashScreen.preventAutoHideAsync();
 
 const initialState = {
@@ -50,7 +50,8 @@ export default function LoginScreen({ navigation }) {
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
-    dispatch(changeAuth(true));
+    // dispatch(changeAuth(true));
+    dispatch(authSignInUser(state));
   };
 
   return (

@@ -21,7 +21,19 @@ const authSignUpUser =
     }
   };
 
-const authSignInUser = () => async (dispatch, getState) => {};
+const authSignInUser =
+  ({ email, password }) =>
+  async (dispatch, getState) => {
+    console.log('login', email, password);
+    try {
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      console.log('user login?', user);
+      return user;
+    } catch (error) {
+      console.log('error:', error);
+      console.log('error.message:', error.message);
+    }
+  };
 
 const authSignOutUser = () => async (dispatch, getState) => {};
 

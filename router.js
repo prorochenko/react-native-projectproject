@@ -6,6 +6,7 @@ import { CommonActions } from '@react-navigation/native';
 import { changeAuth } from './redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { authSelectors } from './redux/auth/authSelectors';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 //icon imports:
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -13,23 +14,41 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
+//screen imports:
 import RegistrationScreen from './screens/auth/RegistrationScreen';
 import LoginScreen from './screens/auth/LoginScreen';
 import PostScreens from './screens/main/PostsScreen';
 import CreateScreen from './screens/main/CreatePostsScreen';
 import ProfileScreen from './screens/main/ProfileScreen';
 
-import React from 'react';
+import db from './firebase/config';
+const auth = getAuth(db);
+
+import React, { useState } from 'react';
 import reactDom from 'react-dom';
+import { setUserId } from 'firebase/analytics';
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
-export const useRoute = isAuth => {
+export const useRoute = () => {
+  const [isAuth, setIsAuth] = useState(false);
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      setIsAuth(true);
+      // setCurrentUser(user);
+      return;
+    } else {
+      setIsAuth(false);
+      // setCurrentUser('');
+      return;
+    }
+  });
   // const addsAuth = useSelector(state => state.isAuth);
   // const isAuth = useSelector(authSelectors.getIsAuth);
   // const aisAuth = false;
   // const isAuth = useSelector(state => state.isAuth);
-  console.log('hey', isAuth);
+  // console.log('hey', isAuth);
   // const dispatch = useDispatch();
   if (!isAuth) {
     return (
