@@ -13,10 +13,20 @@ const authSignUpUser =
   async (dispatch, getState) => {
     console.log(email, password, login);
     try {
-      const { user } = await createUserWithEmailAndPassword(auth, email, password);
-      console.log('user?', user);
-      dispatch(authSlice.actions.updateUserProfile({ userId: user.uid }));
-      return user;
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      await updateProfile(auth.currentUser, {
+        displayName: login,
+      });
+
+      const updateUserSuccess = await auth.currentUser;
+
+      dispatch(
+        authSlice.actions.updateUserProfile({
+          userId: updateUserSuccess.uid,
+          login: updateUserSuccess.displayName,
+        })
+      );
     } catch (error) {
       console.log('error:', error);
       console.log('error.message:', error.message);
@@ -39,4 +49,6 @@ const authSignInUser =
 
 const authSignOutUser = () => async (dispatch, getState) => {};
 
-export { authSignInUser, authSignUpUser, authSignOutUser };
+const authStateChangeUser = () => async (dispatch, getState) => {};
+
+export { authSignInUser, authSignUpUser, authSignOutUser, authStateChangeUser };
