@@ -34,45 +34,39 @@ const DefaultScreenPosts = ({ route, navigation }) => {
           <Text style={styles.userEmail}>email@example.com</Text>
         </View>
       </View>
-      <View>
-        <FlatList
-          data={posts}
-          keyExtractor={(item, index) => (index.toString = uuid())}
-          renderItem={({ item }) => (
-            <View style={styles.postBox}>
-              <Image source={{ uri: item.photo }} style={styles.postBox__photo} />
-              <Text style={styles.postBox__text}>{route.params.state.Name}</Text>
-              <View style={styles.postBox__data}>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={goToComments}
-                  style={{ flexDirection: 'row' }}
-                >
-                  <FontAwesome
-                    name="comment"
-                    size={18}
-                    color="#FF6C00"
-                    style={{ marginRight: 9 }}
-                  />
-                  <Text style={styles.postBox__comments}>8</Text>
-                </TouchableOpacity>
-                <Feather name="thumbs-up" size={18} color="#FF6C00" style={{ marginRight: 10 }} />
-                <Text style={styles.postBox__likes}>153</Text>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={{ flexDirection: 'row' }}
-                  onPress={sendCoordinates}
-                >
-                  <View style={styles.postBox__locationBox}>
-                    <EvilIcons name="location" size={24} color="#BDBDBD" />
-                    <Text style={styles.postBox__location}>{route.params.state.Location}</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+
+      <FlatList
+        data={posts}
+        keyExtractor={(item, index) => (index.toString = uuid())}
+        renderItem={({ item }) => (
+          <View style={styles.postBox}>
+            <Image source={{ uri: item.photo }} style={styles.postBox__photo} />
+            <Text style={styles.postBox__text}>{route.params.state.Name}</Text>
+            <View style={styles.postBox__data}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={goToComments}
+                style={{ flexDirection: 'row' }}
+              >
+                <FontAwesome name="comment" size={18} color="#FF6C00" style={{ marginRight: 9 }} />
+                <Text style={styles.postBox__comments}>8</Text>
+              </TouchableOpacity>
+              <Feather name="thumbs-up" size={18} color="#FF6C00" style={{ marginRight: 10 }} />
+              <Text style={styles.postBox__likes}>153</Text>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={{ flexDirection: 'row' }}
+                onPress={sendCoordinates}
+              >
+                <View style={styles.postBox__locationBox}>
+                  <EvilIcons name="location" size={24} color="#BDBDBD" />
+                  <Text style={styles.postBox__location}>{route.params.state.Location}</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          )}
-        />
-      </View>
+          </View>
+        )}
+      />
     </View>
   );
 };

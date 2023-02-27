@@ -20,6 +20,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeAuth } from '../../redux/store';
 import * as SplashScreen from 'expo-splash-screen';
+import { authSignUpUser } from '../../redux/auth/authOperations';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -38,6 +39,7 @@ export default function RegistrationScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(true);
 
   const isAuth = useSelector(state => state.isAuth);
+
   const dispatch = useDispatch();
 
   console.log('isAuth?', isAuth);
@@ -69,7 +71,8 @@ export default function RegistrationScreen({ navigation }) {
     Keyboard.dismiss();
     console.log(state);
     setState(initialState);
-    dispatch(changeAuth(true));
+    // dispatch(changeAuth(true));
+    dispatch(authSignUpUser(state));
   };
 
   return (
