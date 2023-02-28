@@ -9,13 +9,16 @@ import { useRoute } from '../router';
 import { authStateChangeUser } from '../redux/auth/authOperations';
 SplashScreen.preventAutoHideAsync();
 const Main = () => {
+  const { stateChange } = useSelector(state => state.auth);
+  const routing = useRoute(stateChange);
+
   const [isAuth, setIsAuth] = useState(false);
+
   const dispatch = useDispatch();
 
-  const { stateChange } = useSelector(state => state.auth);
-  console.log('stateChange?', stateChange);
+  // console.log('stateChange?', stateChange);
   useEffect(() => {
-    console.log('yes?');
+    // console.log('yes?');
     dispatch(authStateChangeUser());
   }, []);
 
@@ -34,8 +37,6 @@ const Main = () => {
   if (!fontsLoaded) {
     return null;
   }
-
-  const routing = useRoute(stateChange);
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>

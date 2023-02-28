@@ -15,7 +15,7 @@ const { authSignOut, authStateChange, updateUserProfile } = authSlice.actions;
 const authSignUpUser =
   ({ login, email, password }) =>
   async (dispatch, getState) => {
-    console.log(email, password, login);
+    // console.log(email, password, login);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
@@ -40,10 +40,10 @@ const authSignUpUser =
 const authSignInUser =
   ({ email, password }) =>
   async (dispatch, getState) => {
-    console.log('login', email, password);
+    // console.log('login', email, password);
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      console.log('user login?', user);
+      // console.log('user login?', user);
       return user;
     } catch (error) {
       console.log('error:', error);
@@ -65,7 +65,7 @@ const authStateChangeUser = () => async (dispatch, getState) => {
         userId: user.uid,
       };
 
-      console.log('true?');
+      // console.log('true?');
       dispatch(updateUserProfile(userUpdateProfile));
       dispatch(authStateChange({ stateChange: true }));
     }

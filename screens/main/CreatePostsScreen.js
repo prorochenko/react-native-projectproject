@@ -7,16 +7,19 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  AppRegistry,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
-import { app } from '../../firebase/config';
+import { db } from '../../firebase/config';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import uuid from 'react-uuid';
 import { storage } from '../../firebase/config';
+import { collection, addDoc } from 'firebase/firestore';
 
 const initialState = {
   Name: '',
@@ -24,6 +27,8 @@ const initialState = {
 };
 
 const CreateScreen = ({ navigation }) => {
+  const { userId, login } = useSelector(state => state.auth);
+
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -66,11 +71,11 @@ const CreateScreen = ({ navigation }) => {
     if (cameraRef && location) {
       const { uri } = await cameraRef.takePictureAsync();
 
-      console.log({ uri });
       setPhoto(uri);
       const asset = await MediaLibrary.createAssetAsync(uri);
     }
   };
+
   async function uploadPhotoToServer() {
     try {
       const response = await fetch(photo);
@@ -90,10 +95,31 @@ const CreateScreen = ({ navigation }) => {
     }
   }
 
-  const sendPhoto = () => {
+  const uploadPostToServer = async () => {
+    try {
+      const photo = await uploadPhotoToServer();
+      console.log('photo?', photo, location, state.Name, state.Location, location, userId, login);
+      console.log('test1');
+      const createPost = await addDoc(collection(db, 'posts'), {
+        photo,
+        location,
+        name: state.Name,
+        locationName: state.Location,
+        location,
+        userId,
+        login,
+      });
+      console.log('test2');
+      console.log('Document written with ID: ', createPost);
+    } catch (error) {
+      console.log('error', error.message);
+    }
+  };
+
+  const sendPhoto = async () => {
     // console.log(navigation);
     navigation.navigate('DefaultScreen', { photo, location, state });
-    uploadPhotoToServer();
+    await uploadPostToServer();
   };
 
   return (

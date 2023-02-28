@@ -42,11 +42,11 @@ export const useRoute = isAuth => {
   // const isAuth = false;
   const dispatch = useDispatch();
   const signOut = () => {
-    console.log('hhhhhyyyy');
+    // console.log('hhhhhyyyy');
     dispatch(authSignOutUser());
   };
 
-  console.log('isit?', isAuth);
+  // console.log('isit?', isAuth);
   if (!isAuth) {
     return (
       <AuthStack.Navigator initialRouteName="Register">

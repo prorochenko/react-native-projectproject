@@ -1,30 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity, Button } from 'react-native';
 import uuid from 'react-uuid';
+import { useSelector } from 'react-redux';
+import { onSnapshot, collection } from 'firebase/firestore';
+
+import { db } from '../../firebase/config';
 
 //icons
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
-const DefaultScreenPosts = ({ route, navigation }) => {
+const DefaultScreenPosts = ({ navigation }) => {
   const [posts, setPosts] = useState([]);
 
-  console.log('routessss', route.params);
+  // const { login, email } = useSelector(state => state.auth);
+
+  const getAllPost = async () => {
+    await onSnapshot(collection(db, 'posts'), data => {
+      setPosts(
+        data.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    });
+  };
+
   useEffect(() => {
-    if (route.params) {
-      setPosts(prevState => [...prevState, route.params]);
-    }
-  }, [route.params]);
-  console.log('rout????', route.params);
+    getAllPost();
+  }, []);
 
-  const goToComments = () => {
-    navigation.navigate('Comments', route.params);
-  };
+  // useEffect(() => {
+  //   if (route.params) {
+  //     setPosts(prevState => [...prevState, route.params]);
+  //   }
+  // }, [route.params]);
 
-  const sendCoordinates = () => {
-    navigation.navigate('Map', route.params);
-  };
+  // const goToComments = () => {
+  //   navigation.navigate('Comments', { location: item.location });
+  // };
+
+  // const sendCoordinates = () => {
+  //   navigation.navigate('Map', { location: item.location });
+  // };
   return (
     <View style={styles.container}>
       <View style={styles.userBox}>
@@ -41,11 +60,17 @@ const DefaultScreenPosts = ({ route, navigation }) => {
         renderItem={({ item }) => (
           <View style={styles.postBox}>
             <Image source={{ uri: item.photo }} style={styles.postBox__photo} />
-            <Text style={styles.postBox__text}>{route.params.state.Name}</Text>
+            <Text style={styles.postBox__text}>{item.name}</Text>
             <View style={styles.postBox__data}>
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={goToComments}
+                onPress={() =>
+                  navigation.navigate('Comments', {
+                    photo: item.photo,
+                    postId: item.id,
+                    userId: item.userId,
+                  })
+                }
                 style={{ flexDirection: 'row' }}
               >
                 <FontAwesome name="comment" size={18} color="#FF6C00" style={{ marginRight: 9 }} />
@@ -56,11 +81,11 @@ const DefaultScreenPosts = ({ route, navigation }) => {
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={{ flexDirection: 'row' }}
-                onPress={sendCoordinates}
+                onPress={() => navigation.navigate('Map', { location: item.location })}
               >
                 <View style={styles.postBox__locationBox}>
                   <EvilIcons name="location" size={24} color="#BDBDBD" />
-                  <Text style={styles.postBox__location}>{route.params.state.Location}</Text>
+                  <Text style={styles.postBox__location}>{item.locationName}</Text>
                 </View>
               </TouchableOpacity>
             </View>

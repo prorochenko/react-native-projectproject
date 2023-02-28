@@ -6,6 +6,7 @@ import { getReactNativePersistence, initializeAuth } from 'firebase/auth/react-n
 
 import 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
+
 import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -13,13 +14,12 @@ import { getStorage } from 'firebase/storage';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyAcGiQDfAN2UJa0jfKhNlTuuEHa25rHTBw',
-  authDomain: 'react-native-goit-project.firebaseapp.com',
-  projectId: 'react-native-goit-project',
-  storageBucket: 'react-native-goit-project.appspot.com',
-  messagingSenderId: '452605277138',
-  appId: '1:452605277138:web:450f934b1eb34995d58e0b',
-  measurementId: 'G-XKQYL0CHRJ',
+  apiKey: 'AIzaSyBU6B96j_dD_ox_Ol1HXMWWBC1fSl8rrNc',
+  authDomain: 'react-native-pr-2.firebaseapp.com',
+  projectId: 'react-native-pr-2',
+  storageBucket: 'react-native-pr-2.appspot.com',
+  messagingSenderId: '331448940021',
+  appId: '1:331448940021:web:e07525d8ab6cd80e559cbc',
 };
 
 // Initialize Firebase
@@ -30,3 +30,4 @@ export const auth = initializeAuth(app, {
 });
 
 export const storage = getStorage(app);
+export const db = getFirestore(app);
