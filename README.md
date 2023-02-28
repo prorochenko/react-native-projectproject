@@ -110,3 +110,17 @@ Screenshots + Video:
 - Add logic Logout on PostsScreen when clicking on icon in header using Firebase methods
 - Add post loading logic to database using Firebase and Redux
 - Add logic for adding a comment under a post using Firebase and Redux
+
+Screenshots:
+- firebase-auth-users https://drive.google.com/file/d/1DMyvF1uf4uLmUjSCffg2tF5ScWO2hXZE/view?usp=share_link
+- firebase-storage-photoshttps://drive.google.com/file/d/1GGCMTCQJhqAav6Nhon4PPMvvZN3Tae2_/view?usp=share_link
+- firestore-database-comments https://drive.google.com/file/d/1gHiVvIwoI2KEdPRYqB9sr4B0Y90Wix7k/view?usp=share_link
+- firestore-database1 https://drive.google.com/file/d/1t9tAnhFu_Jp9b4p8d49gNBP04WL7RvCV/view?usp=share_link
+- https://drive.google.com/file/d/1ilkwlgH1SOqPe6v4SUhd9CJPrKhh_6Cv/view?usp=share_link
+- https://drive.google.com/file/d/1P_RJk2iaJdhsq2cmhEaeMDw3hmEmua2P/view?usp=share_link
+- https://drive.google.com/file/d/1tr6erVcX6G9qMuXTNiXsxoj5g5ahD95N/view?usp=share_link
+- https://drive.google.com/file/d/16mB9XC2SlCBDwzvQLTqSdrSerY4VhFXF/view?usp=share_link
+video:
+- https://drive.google.com/file/d/1sWI-NIHlHgaTtt7YNJhiBGINyn0IKOw8/view?usp=share_link
+
+
