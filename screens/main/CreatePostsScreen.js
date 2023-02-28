@@ -74,15 +74,16 @@ const CreateScreen = ({ navigation }) => {
   async function uploadPhotoToServer() {
     try {
       const response = await fetch(photo);
+      //blob - it's to some format
       const file = await response.blob();
 
       const uniquePhotoId = uuid();
       const storageRef = ref(storage, `photos/photo_${uniquePhotoId}`);
-      console.log('storageRef', storageRef);
-      console.log('file', file);
+
       await uploadBytes(storageRef, file);
 
       const photoUrl = await getDownloadURL(storageRef);
+      // console.log('photoUrl', photoUrl);
       return photoUrl;
     } catch (error) {
       console.log(error.message);
