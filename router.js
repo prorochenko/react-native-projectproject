@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { authStateChangeUser } from './redux/auth/authOperations';
+import { authSignOutUser } from './redux/auth/authOperations';
 
 //icon imports:
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -39,6 +40,12 @@ export const useRoute = isAuth => {
   //   }
   // });
   // const isAuth = false;
+  const dispatch = useDispatch();
+  const signOut = () => {
+    console.log('hhhhhyyyy');
+    dispatch(authSignOutUser());
+  };
+
   console.log('isit?', isAuth);
   if (!isAuth) {
     return (
@@ -84,7 +91,7 @@ export const useRoute = isAuth => {
               name="exit-outline"
               size={26}
               color="#BDBDBD"
-              // onPress={() => dispatch(changeAuth(false))}
+              onPress={signOut}
             />
           ),
         }}
