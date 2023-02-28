@@ -1,12 +1,9 @@
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import { HeaderBackButton } from '@react-navigation/elements';
-import { CommonActions } from '@react-navigation/native';
-import { changeAuth } from './redux/store';
-import { useSelector, useDispatch } from 'react-redux';
-import { authSelectors } from './redux/auth/authSelectors';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { authStateChangeUser } from './redux/auth/authOperations';
 
 //icon imports:
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -22,34 +19,27 @@ import CreateScreen from './screens/main/CreatePostsScreen';
 import ProfileScreen from './screens/main/ProfileScreen';
 
 import db from './firebase/config';
-const auth = getAuth(db);
 
-import React, { useState } from 'react';
-import reactDom from 'react-dom';
-import { setUserId } from 'firebase/analytics';
+// const auth = getAuth(db);
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
-export const useRoute = () => {
-  const [isAuth, setIsAuth] = useState(false);
-
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      setIsAuth(true);
-      // setCurrentUser(user);
-      return;
-    } else {
-      setIsAuth(false);
-      // setCurrentUser('');
-      return;
-    }
-  });
-  // const addsAuth = useSelector(state => state.isAuth);
-  // const isAuth = useSelector(authSelectors.getIsAuth);
-  // const aisAuth = false;
-  // const isAuth = useSelector(state => state.isAuth);
-  // console.log('hey', isAuth);
-  // const dispatch = useDispatch();
+export const useRoute = isAuth => {
+  // const [isAuth, setIsAuth] = useState(false);
+  // onAuthStateChanged(auth, user => {
+  //   console.log('whatisit?', user);
+  //   if (user) {
+  //     setIsAuth(true);
+  //     // setCurrentUser(user);
+  //     return;
+  //   } else {
+  //     setIsAuth(false);
+  //     // setCurrentUser('');
+  //     return;
+  //   }
+  // });
+  // const isAuth = false;
+  console.log('isit?', isAuth);
   if (!isAuth) {
     return (
       <AuthStack.Navigator initialRouteName="Register">

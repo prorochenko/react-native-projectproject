@@ -1,34 +1,47 @@
-import React from 'react';
-import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
-import { HeaderBackButton } from '@react-navigation/elements';
-import { CommonActions } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useRoute } from '../router';
+import React, { useEffect, useState, useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font';
 
-//icon imports:
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-
-const MainTab = createBottomTabNavigator();
-
+import { View, Text } from 'react-native';
+import { useRoute } from '../router';
+import { authStateChangeUser } from '../redux/auth/authOperations';
+SplashScreen.preventAutoHideAsync();
 const Main = () => {
-  const routing = useRoute();
+  const [isAuth, setIsAuth] = useState(false);
+  const dispatch = useDispatch();
+
+  const { stateChange } = useSelector(state => state.auth);
+  console.log('stateChange?', stateChange);
+  useEffect(() => {
+    console.log('yes?');
+    dispatch(authStateChangeUser());
+  }, []);
+
+  const [fontsLoaded] = useFonts({
+    Roboto_Regular: require('../assets/fonts/Roboto-Regular.ttf'),
+    Roboto_Medium: require('../assets/fonts/Roboto-Medium.ttf'),
+    Roboto_Bold: require('../assets/fonts/Roboto-Bold.ttf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  const routing = useRoute(stateChange);
 
   return (
-    <View>
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <NavigationContainer>{routing}</NavigationContainer>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 export default Main;

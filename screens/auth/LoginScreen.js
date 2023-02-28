@@ -48,7 +48,7 @@ export default function LoginScreen({ navigation }) {
   const submitData = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+    // console.log(state);
     setState(initialState);
     // dispatch(changeAuth(true));
     dispatch(authSignInUser(state));

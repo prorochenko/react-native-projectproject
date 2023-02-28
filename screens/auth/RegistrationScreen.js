@@ -22,7 +22,7 @@ import { changeAuth } from '../../redux/store';
 import * as SplashScreen from 'expo-splash-screen';
 import { authSignUpUser } from '../../redux/auth/authOperations';
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 const initialState = {
   login: '',
@@ -38,11 +38,9 @@ export default function RegistrationScreen({ navigation }) {
   const [passwordBorderOnFocus, setPasswordBorderOnFocus] = useState('#E8E8E8');
   const [showPassword, setShowPassword] = useState(true);
 
-  const isAuth = useSelector(state => state.isAuth);
+  // const isAuth = useSelector(state => state.isAuth);
 
   const dispatch = useDispatch();
-
-  console.log('isAuth?', isAuth);
 
   const changePasswordVisible = () => {
     setShowPassword(!showPassword);
@@ -69,7 +67,7 @@ export default function RegistrationScreen({ navigation }) {
   const submitData = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-    console.log(state);
+    // console.log(state);
     setState(initialState);
     // dispatch(changeAuth(true));
     dispatch(authSignUpUser(state));

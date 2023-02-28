@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeAuth } from '../../redux/store';
-
+import { authSignOutUser } from '../../redux/auth/authOperations';
 //icons
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,6 +23,11 @@ import { EvilIcons } from '@expo/vector-icons';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
+
+  const signOut = () => {
+    console.log('hhhhhyyyy');
+    dispatch(authSignOutUser());
+  };
 
   return (
     <View style={styles.container}>
@@ -42,12 +47,7 @@ const ProfileScreen = () => {
               </TouchableOpacity>
             </View>
             <TouchableOpacity activeOpacity={0.8} style={styles.iconExit}>
-              <Ionicons
-                name="exit-outline"
-                size={26}
-                color="#BDBDBD"
-                onPress={() => dispatch(changeAuth(false))}
-              />
+              <Ionicons name="exit-outline" size={26} color="#BDBDBD" onPress={signOut} />
             </TouchableOpacity>
 
             <Text style={styles.title}>Natali Romanova</Text>

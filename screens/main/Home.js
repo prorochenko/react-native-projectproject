@@ -16,9 +16,9 @@ import { Ionicons } from '@expo/vector-icons';
 const MainTab = createBottomTabNavigator();
 
 const Home = () => {
-  const isAuth = useSelector(state => state.isAuth);
-  const routing = useRoute(isAuth);
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  // const isAuth = useSelector(state => state.isAuth);
+  // const routing = useRoute(isAuth);
+  // return <NavigationContainer>{routing}</NavigationContainer>;
 };
 
 const styles = StyleSheet.create({
