@@ -78,7 +78,7 @@ const ProfileScreen = () => {
                         color="#FF6C00"
                         style={{ marginRight: 10 }}
                       />
-                      <Text style={styles.postBox__likes}>153</Text>
+                      <Text style={styles.postBox__likes}>soon..</Text>
                       <View style={styles.postBox__locationBox}>
                         <EvilIcons name="location" size={24} color="#BDBDBD" />
                         <Text style={styles.postBox__location}>{item.locationName}</Text>

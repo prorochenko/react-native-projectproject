@@ -16,6 +16,7 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 
 const CommentsScreen = ({ route }) => {
@@ -35,7 +36,7 @@ const CommentsScreen = ({ route }) => {
     await addDoc(collection(doc(db, 'posts', postId), 'comments'), {
       comment,
       login,
-      date: Date.now(),
+      date: new Date().toString(),
       userId,
     });
     // await updateDoc(doc(db, 'posts', postId), {
@@ -62,9 +63,10 @@ const CommentsScreen = ({ route }) => {
     getAllPosts();
   }, []);
 
-  console.log('leng', allComment.length);
+  console.log('leng', allComment);
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide} allComment={allComment.length}>
+    <>
+      {/* <TouchableWithoutFeedback onPress={keyboardHide}> */}
       {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}> */}
       <View style={styles.container}>
         <View style={styles.postBox}>
@@ -96,6 +98,7 @@ const CommentsScreen = ({ route }) => {
           }}
           keyExtractor={item => item.id}
         />
+
         <View style={styles.input__box}>
           <TextInput
             onChangeText={setComment}
@@ -114,7 +117,8 @@ const CommentsScreen = ({ route }) => {
         </View>
       </View>
       {/* </KeyboardAvoidingView> */}
-    </TouchableWithoutFeedback>
+      {/* </TouchableWithoutFeedback> */}
+    </>
   );
 };
 
@@ -133,6 +137,7 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     fontSize: 16,
     lineHeight: 19,
+    marginBottom: 20,
   },
   postBox__photo: {
     height: 240,

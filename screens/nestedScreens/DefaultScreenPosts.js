@@ -30,22 +30,8 @@ const DefaultScreenPosts = ({ navigation }) => {
 
   useEffect(() => {
     getAllPost();
-    getAllComments();
   }, []);
-  console.log('posts', posts);
-
-  const getAllComments = async () => {
-    await onSnapshot(collection(doc(db, 'posts', postId), 'comments'), data => {
-      setAllComment(
-        data.docs.map(doc => ({
-          ...doc.data(),
-          id: doc.id,
-          dateComment: doc.data().date,
-          time: doc.data().date,
-        }))
-      );
-    });
-  };
+  console.log('posts', posts.comments);
 
   return (
     <View style={styles.container}>
@@ -80,7 +66,7 @@ const DefaultScreenPosts = ({ navigation }) => {
                 <Text style={styles.postBox__comments}>{allComment.length}</Text>
               </TouchableOpacity>
               <Feather name="thumbs-up" size={18} color="#FF6C00" style={{ marginRight: 10 }} />
-              <Text style={styles.postBox__likes}>0</Text>
+              <Text style={styles.postBox__likes}>soon..</Text>
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={{ flexDirection: 'row', marginLeft: 'auto' }}
