@@ -63,7 +63,7 @@ const DefaultScreenPosts = ({ navigation }) => {
                 style={{ flexDirection: 'row' }}
               >
                 <FontAwesome name="comment" size={18} color="#FF6C00" style={{ marginRight: 9 }} />
-                <Text style={styles.postBox__comments}>{allComment.length}</Text>
+                <Text style={styles.postBox__comments}>Soon..</Text>
               </TouchableOpacity>
               <Feather name="thumbs-up" size={18} color="#FF6C00" style={{ marginRight: 10 }} />
               <Text style={styles.postBox__likes}>soon..</Text>

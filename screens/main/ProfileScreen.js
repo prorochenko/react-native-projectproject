@@ -71,7 +71,7 @@ const ProfileScreen = () => {
                         color="#FF6C00"
                         style={{ marginRight: 9 }}
                       />
-                      <Text style={styles.postBox__comments}>8</Text>
+                      <Text style={styles.postBox__comments}>Soon..</Text>
                       <Feather
                         name="thumbs-up"
                         size={18}

@@ -84,9 +84,9 @@ const CommentsScreen = ({ route }) => {
                   <View>
                     <Text style={styles.comment__text}>{item.comment}</Text>
                     <View style={styles.commentDateBox}>
-                      <Text style={styles.commentDateBox__date}>{item.dateComment}</Text>
+                      <Text style={styles.commentDateBox__date}>{/* {item.dateComment} */}</Text>
                       <View style={styles.comment__border}></View>
-                      <Text style={styles.commentDateBox__date}>{item.time}</Text>
+                      <Text style={styles.commentDateBox__date}>{/* {item.time} */}</Text>
                     </View>
                   </View>
                 </View>
