@@ -13,6 +13,10 @@ import { EvilIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import * as Location from 'expo-location';
+import { app } from '../../firebase/config';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import uuid from 'react-uuid';
+import { storage } from '../../firebase/config';
 
 const initialState = {
   Name: '',
@@ -67,11 +71,30 @@ const CreateScreen = ({ navigation }) => {
       const asset = await MediaLibrary.createAssetAsync(uri);
     }
   };
+  async function uploadPhotoToServer() {
+    try {
+      const response = await fetch(photo);
+      const file = await response.blob();
+
+      const uniquePhotoId = uuid();
+      const storageRef = ref(storage, `photos/photo_${uniquePhotoId}`);
+      console.log('storageRef', storageRef);
+      console.log('file', file);
+      await uploadBytes(storageRef, file);
+
+      const photoUrl = await getDownloadURL(storageRef);
+      return photoUrl;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   const sendPhoto = () => {
     // console.log(navigation);
     navigation.navigate('DefaultScreen', { photo, location, state });
+    uploadPhotoToServer();
   };
+
   return (
     <View style={styles.container}>
       {photo === '' ? (
