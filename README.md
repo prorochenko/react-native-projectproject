@@ -123,4 +123,9 @@ Screenshots:
 video:
 - https://drive.google.com/file/d/1sWI-NIHlHgaTtt7YNJhiBGINyn0IKOw8/view?usp=share_link
 
+# 7th HomeWork:
+
+- Upload project to expo servers
+- 
+https://expo.dev/@prorochenko/react-native-projectproject?serviceType=classic&distribution=expo-go&release-channel=react-native-projectproject 
 
