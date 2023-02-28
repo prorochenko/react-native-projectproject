@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { AntDesign } from '@expo/vector-icons';
 
 //screens
 import DefaultScreenPosts from '../nestedScreens/DefaultScreenPosts';
@@ -8,7 +9,7 @@ import CommentsScreen from '../nestedScreens/CommentsScreen';
 import MapScreen from '../nestedScreens/MapScreen';
 
 const NestedScreens = createStackNavigator();
-const PostScreens = () => {
+const PostScreens = ({ navigation }) => {
   return (
     <NestedScreens.Navigator initialRouteName="DefaultScreen">
       <NestedScreens.Screen
@@ -24,16 +25,34 @@ const PostScreens = () => {
       <NestedScreens.Screen
         options={{
           headerShown: false,
+          // headerLeft: () => (
+          //   <HeaderBackButton
+          //     onPress={() => {
+          //       navigation.dispatch(CommonActions.goBack());
+          //     }}
+          // />
+          // <HeaderBackButton title="Hello" onPress={() => navigation.navigate('Posts')} />
+          // <TouchableOpacity activeOpacity={0.8}>
+          //   <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={10} color="#BDBDBD" />
+          // </TouchableOpacity>
+          // ),
           headerLeft: () => (
-            <HeaderBackButton
-              onPress={() => {
-                navigation.dispatch(CommonActions.goBack());
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                left: 16,
               }}
-            />
-            // <HeaderBackButton title="Hello" onPress={() => navigation.navigate('Posts')} />
-            // <TouchableOpacity activeOpacity={0.8}>
-            //   <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={10} color="#BDBDBD" />
-            // </TouchableOpacity>
+            >
+              <AntDesign
+                style={{ marginLeft: 16 }}
+                name="arrowleft"
+                size={24}
+                color="#BDBDBD"
+                onPress={() => navigation.navigate('PostsScreen')}
+              />
+            </TouchableOpacity>
           ),
           headerBackButtonMenuEnabled: true,
         }}

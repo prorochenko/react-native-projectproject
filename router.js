@@ -42,7 +42,6 @@ export const useRoute = isAuth => {
   // const isAuth = false;
   const dispatch = useDispatch();
   const signOut = () => {
-    // console.log('hhhhhyyyy');
     dispatch(authSignOutUser());
   };
 
@@ -105,17 +104,29 @@ export const useRoute = isAuth => {
               <AntDesign name="plus" size={20} color="white" />
             </View>
           ),
+
           headerLeft: () => (
-            // <HeaderBackButton
-            // onPress={() => {
-            // navigation.dispatch(CommonActions.goBack());
-            // }}
-            // />
-            // <HeaderBackButton title="Hello" onPress={() => navigation.navigate('Posts')} />
-            <TouchableOpacity activeOpacity={0.8}>
-              <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={10} color="#BDBDBD" />
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                left: 16,
+              }}
+            >
+              <AntDesign
+                style={{ marginLeft: 16 }}
+                name="arrowleft"
+                size={24}
+                color="#BDBDBD"
+                // onPress={() => navigation.navigate('PostsScreen')}
+              />
             </TouchableOpacity>
           ),
+          // <TouchableOpacity activeOpacity={0.8}>
+          //   <AntDesign style={{ marginLeft: 16 }} name="arrowleft" size={10} color="#BDBDBD" />
+          // </TouchableOpacity>
+
           headerBackButtonMenuEnabled: true,
         }}
         name="Create"
