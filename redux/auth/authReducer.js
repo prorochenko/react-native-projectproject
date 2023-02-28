@@ -5,6 +5,7 @@ const state = {
   userId: null,
   login: null,
   stateChange: false,
+  email: null,
 };
 
 const actions = {
@@ -12,6 +13,7 @@ const actions = {
     ...state,
     userId: payload.userId,
     login: payload.login,
+    email: payload.email,
   }),
   authStateChange: (state, { payload }) => ({ ...state, stateChange: payload.stateChange }),
   authSignOut: () => state,

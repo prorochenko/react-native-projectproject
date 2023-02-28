@@ -61,9 +61,10 @@ const CommentsScreen = ({ route }) => {
   useEffect(() => {
     getAllPosts();
   }, []);
-  console.log(allComment.length);
+
+  console.log('leng', allComment.length);
   return (
-    <TouchableWithoutFeedback onPress={keyboardHide}>
+    <TouchableWithoutFeedback onPress={keyboardHide} allComment={allComment.length}>
       {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}> */}
       <View style={styles.container}>
         <View style={styles.postBox}>

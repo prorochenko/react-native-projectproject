@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -8,12 +8,14 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Image,
-  ScrollView,
-  SafeAreaView,
+  FlatList,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeAuth } from '../../redux/store';
 import { authSignOutUser } from '../../redux/auth/authOperations';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '../../firebase/config';
+
 //icons
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,10 +24,21 @@ import { Feather } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 
 const ProfileScreen = () => {
+  const [userPosts, setUserPosts] = useState([]);
   const dispatch = useDispatch();
+  const { userId, login } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    getUserPosts();
+  }, []);
+
+  const getUserPosts = async () => {
+    onSnapshot(query(collection(db, 'posts'), where('userId', '==', userId)), data => {
+      setUserPosts(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+    });
+  };
 
   const signOut = () => {
-    console.log('hhhhhyyyy');
     dispatch(authSignOutUser());
   };
 
@@ -38,101 +51,45 @@ const ProfileScreen = () => {
               <Image source={require('../../assets/avaBig.png')} style={styles.ava} />
               <TouchableOpacity activeOpacity={0.8}>
                 <AntDesign name="closecircleo" style={styles.avatarBtn} size={24} color="#E8E8E8" />
-                {/* <AntDesign
-                      style={styles.avatarBtn}
-                      name="pluscircleo"
-                      size={25}
-                      color="#FF6C00"
-                    /> */}
               </TouchableOpacity>
             </View>
             <TouchableOpacity activeOpacity={0.8} style={styles.iconExit}>
               <Ionicons name="exit-outline" size={26} color="#BDBDBD" onPress={signOut} />
             </TouchableOpacity>
-
-            <Text style={styles.title}>Natali Romanova</Text>
-            <SafeAreaView style={{ flex: 1 }}>
-              <ScrollView
-                contentContainerStyle={{
-                  flexGrow: 1,
-                  justifyContent: 'space-between',
-                }}
-              >
-                <View style={styles.postBox}>
-                  <Image source={require('../../assets/pic1.png')} style={styles.pictures} />
-                  <Text style={styles.postBox__text}>Forest</Text>
-                  <View style={styles.postBox__data}>
-                    <FontAwesome
-                      name="comment"
-                      size={18}
-                      color="#FF6C00"
-                      style={{ marginRight: 9 }}
-                    />
-                    <Text style={styles.postBox__comments}>8</Text>
-                    <Feather
-                      name="thumbs-up"
-                      size={18}
-                      color="#FF6C00"
-                      style={{ marginRight: 10 }}
-                    />
-                    <Text style={styles.postBox__likes}>153</Text>
-                    <View style={styles.postBox__locationBox}>
-                      <EvilIcons name="location" size={24} color="#BDBDBD" />
-                      <Text style={styles.postBox__location}>Ukraine</Text>
+            <Text style={styles.title}>{login}</Text>
+            <FlatList
+              data={userPosts.sort((a, b) => (a.date < b.date ? 1 : -1))}
+              renderItem={({ item }) => (
+                <>
+                  <View style={styles.postBox}>
+                    <Image source={{ uri: item.photo }} style={styles.pictures} />
+                    <Text style={styles.postBox__text}>{item.name}</Text>
+                    <View style={styles.postBox__data}>
+                      <FontAwesome
+                        name="comment"
+                        size={18}
+                        color="#FF6C00"
+                        style={{ marginRight: 9 }}
+                      />
+                      <Text style={styles.postBox__comments}>8</Text>
+                      <Feather
+                        name="thumbs-up"
+                        size={18}
+                        color="#FF6C00"
+                        style={{ marginRight: 10 }}
+                      />
+                      <Text style={styles.postBox__likes}>153</Text>
+                      <View style={styles.postBox__locationBox}>
+                        <EvilIcons name="location" size={24} color="#BDBDBD" />
+                        <Text style={styles.postBox__location}>{item.locationName}</Text>
+                      </View>
                     </View>
                   </View>
-                </View>
-                <View style={styles.postBox}>
-                  <Image source={require('../../assets/pic2.png')} style={styles.pictures} />
-                  <Text style={styles.postBox__text}>Forest</Text>
-                  <View style={styles.postBox__data}>
-                    <FontAwesome
-                      name="comment"
-                      size={18}
-                      color="#FF6C00"
-                      style={{ marginRight: 9 }}
-                    />
-                    <Text style={styles.postBox__comments}>8</Text>
-                    <Feather
-                      name="thumbs-up"
-                      size={18}
-                      color="#FF6C00"
-                      style={{ marginRight: 10 }}
-                    />
-                    <Text style={styles.postBox__likes}>153</Text>
-                    <View style={styles.postBox__locationBox}>
-                      <EvilIcons name="location" size={24} color="#BDBDBD" />
-                      <Text style={styles.postBox__location}>Ukraine</Text>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.postBox}>
-                  <Image source={require('../../assets/pic3.png')} style={styles.pictures} />
-                  <Text style={styles.postBox__text}>Forest</Text>
-                  <View style={styles.postBox__data}>
-                    <FontAwesome
-                      name="comment"
-                      size={18}
-                      color="#FF6C00"
-                      style={{ marginRight: 9 }}
-                    />
-                    <Text style={styles.postBox__comments}>8</Text>
-                    <Feather
-                      name="thumbs-up"
-                      size={18}
-                      color="#FF6C00"
-                      style={{ marginRight: 10 }}
-                    />
-                    <Text style={styles.postBox__likes}>153</Text>
-                    <View style={styles.postBox__locationBox}>
-                      <EvilIcons name="location" size={24} color="#BDBDBD" />
-                      <Text style={styles.postBox__location}>Ukraine</Text>
-                    </View>
-                  </View>
-                </View>
-                <View style={{ height: 299 }} />
-              </ScrollView>
-            </SafeAreaView>
+                </>
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
+            <View style={{ height: 299 }} />
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>

@@ -13,9 +13,10 @@ import { EvilIcons } from '@expo/vector-icons';
 
 const DefaultScreenPosts = ({ navigation }) => {
   const [posts, setPosts] = useState([]);
+  const [allComment, setAllComment] = useState([]);
 
-  // const { login, email } = useSelector(state => state.auth);
-
+  const { email, login } = useSelector(state => state.auth);
+  console.log('email?', email);
   const getAllPost = async () => {
     await onSnapshot(collection(db, 'posts'), data => {
       setPosts(
@@ -29,28 +30,30 @@ const DefaultScreenPosts = ({ navigation }) => {
 
   useEffect(() => {
     getAllPost();
+    getAllComments();
   }, []);
+  console.log('posts', posts);
 
-  // useEffect(() => {
-  //   if (route.params) {
-  //     setPosts(prevState => [...prevState, route.params]);
-  //   }
-  // }, [route.params]);
+  const getAllComments = async () => {
+    await onSnapshot(collection(doc(db, 'posts', postId), 'comments'), data => {
+      setAllComment(
+        data.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id,
+          dateComment: doc.data().date,
+          time: doc.data().date,
+        }))
+      );
+    });
+  };
 
-  // const goToComments = () => {
-  //   navigation.navigate('Comments', { location: item.location });
-  // };
-
-  // const sendCoordinates = () => {
-  //   navigation.navigate('Map', { location: item.location });
-  // };
   return (
     <View style={styles.container}>
       <View style={styles.userBox}>
         <Image source={require('../../assets/ava.png')} style={styles.Ava} />
         <View style={styles.userData}>
-          <Text style={styles.userName}>Natali Romanova</Text>
-          <Text style={styles.userEmail}>email@example.com</Text>
+          <Text style={styles.userName}>{login}</Text>
+          <Text style={styles.userEmail}>{email}</Text>
         </View>
       </View>
 
@@ -74,13 +77,13 @@ const DefaultScreenPosts = ({ navigation }) => {
                 style={{ flexDirection: 'row' }}
               >
                 <FontAwesome name="comment" size={18} color="#FF6C00" style={{ marginRight: 9 }} />
-                <Text style={styles.postBox__comments}>8</Text>
+                <Text style={styles.postBox__comments}>{allComment.length}</Text>
               </TouchableOpacity>
               <Feather name="thumbs-up" size={18} color="#FF6C00" style={{ marginRight: 10 }} />
-              <Text style={styles.postBox__likes}>153</Text>
+              <Text style={styles.postBox__likes}>0</Text>
               <TouchableOpacity
                 activeOpacity={0.8}
-                style={{ flexDirection: 'row' }}
+                style={{ flexDirection: 'row', marginLeft: 'auto' }}
                 onPress={() => navigation.navigate('Map', { location: item.location })}
               >
                 <View style={styles.postBox__locationBox}>
